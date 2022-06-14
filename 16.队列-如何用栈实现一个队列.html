@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*如何用栈实现一个队列
+    实现队列的以下操作
+    push  将元素放入尾部
+    shfit 移除队首
+    peek  返回队首
+    empty 返回队列是否为空
+    */
+
+    /*
+    核心思想，队列是先进后出，栈是后进先出
+    
+    */
+   function MyQueue(){
+    // 初始化两个栈
+    this.stack1=[]
+    this.stack2=[]
+   }
+   MyQueue.prototype.push=function(el){
+     this.stack1.push(el)
+   }
+   MyQueue.prototype.shfit=function(){
+      if(this.stack2.length<=0){
+        // 将栈1里面的元素全部出栈，放到栈2里面
+        // 这时，栈2里面的元素顺序就被逆序了
+           for(let i;i<this.stack1.length;i++){
+             const top=this.stack1.pop()
+             this.stack2.push(top)
+           }
+      }
+      return this.stack2.pop()
+   }
+
+   MyQueue.prototype.peek=function(){
+      if(this.stack2.length<=0){
+        // 将栈1里面的元素全部出栈，放到栈2里面
+        // 这时，栈2里面的元素顺序就被逆序了
+           for(let i;i<this.stack1.length;i++){
+             const top=this.stack1.pop()
+             this.stack2.push(top)
+           }
+      }
+      return this.stack2[this.stack2.length-1]
+   }
+   MyQueue.prototype.empty=function(){
+    //  如果栈1和栈2都为空，那么队列为空
+     if(this.stack1.length==0&&this.stack2.length==0){
+       return true
+     }
+     return false
+   }
+  
+
+  </script>
+</body>
+</html>

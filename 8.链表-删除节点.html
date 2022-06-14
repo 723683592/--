@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+   <script>
+    //  删除排序链表重复节点
+    function deleteNode(head){
+      let cur=head
+      while(cur&&cur.next){
+        // 如果重复,只是将下一节点指向变一下,还没有完成跳过操作
+        if(cur.val==cur.next.val){
+          cur.next=cur.next.next
+        }
+        // 如果不重复继续遍历
+        else{
+          cur=cur.next
+        }
+      }
+      return head
+
+    }
+    //给定一个排序链表,删除里面所有含有重复数字的节点,只保留原始链表里面没有出现重复的数字
+    function deleteNode_all(head){
+      // 必须定义一个虚拟头节点
+      const hair=new ListNode(-1)
+      hair.next=head
+      let cur=hair
+      // 必须有一个不能被删掉的节点放在头部,不然删除的节点可能会让链表断开
+      while(cur.next&&cur.next.next){
+        if(cur.next.val==cur.next.next.val){
+           let value=cur.next.val
+           cur.next=cur.next.next.next
+          //  关于while循环的边界条件要考虑链表/数组的长度问题
+           while(cur.next.val==value&&cur.next){
+            cur.next=cur.next.next
+           }
+        }
+        else{
+          cur=cur.next
+        }
+      }
+      return hair.next
+    }
+   </script>
+</body>
+</html>

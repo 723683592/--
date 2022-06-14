@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*快速排序
+    也是分治的思想，不过他这个不需要切分再合并，他这个执行完，
+    整个数组自然而然就变成升序的了
+    */
+    const nums = [2, 3, 4, 1, 5, 2, 9, 8, 6]
+
+    function fastSort(nums, left = 0, right = nums.length - 1) {
+      // 设定边界条件,只要这个子数组长度变成1就会无操作退出本层函数
+      if (nums.length <= 1) {
+        return
+      }
+      // 创建分割点，下面这个split函数每运行一次就会产生一次分隔
+      const flag = split(nums, left, right)
+      if (flag - 1 > left) {
+        fastSort(nums, left, flag - 1)
+      }
+      if (right > flag) {
+        fastSort(nums, flag, right)
+      }
+      return nums
+      function split(arr, left, right) {
+        const mid = Math.floor(left+(right-left) / 2)
+        let l1 = left
+        let l2 = right
+        while (l1 <= l2) {
+          while (arr[l1] < arr[mid]) {
+            l1++
+          }
+          while (arr[l2] > arr[mid]) {
+            l2--
+          }
+          if (l1 <= l2) {
+            const temp = arr[l1]
+            arr[l1] = arr[l2]
+            arr[l2] = temp
+            l1++
+            l2--
+          }}
+        return l1
+      }}
+    console.log(fastSort(nums))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  /*
+  每日温度问题
+  根据每日气温列表，请重新生成一个列表，对应位置的输出是需要再等几天，温度
+  才会升高超过该日， 如[73,74,75,71,69,72,76,73]->[1,1,4,2,1,1,0,0]
+  */
+  <script>
+   /*
+   维护一个递减栈   
+   */
+  function getTem(arr){
+    // 创建结果数组
+    const res=(new Array(arr.length)).fill(0)
+    // 创建辅助栈  用来存放递减温度日期的索引
+    //当出现非递减序列的时候，当前的i减去栈顶存的索引就是该位置处需要等待的天数
+    const stack=[]
+    for(let i=0;i<arr.length;i++){
+      // 只要不满足递减栈，就会发生出栈，做差，存值的操作
+       while(stack.length!==0&&arr[i]>arr[stack[stack.length-1]]){
+        //  栈顶出栈，取取栈顶
+          const top=stack.pop()
+        //取出来的栈顶的索引就是要放res数组中的位置
+        res[top]=i-top
+       }
+      //  注意这个push的位置，不能放在while前面
+      //  如果先push的话，栈顶就不是要放结果的位置了
+       stack.push(i)
+    }
+    return res
+  }
+  </script>
+</body>
+</html>

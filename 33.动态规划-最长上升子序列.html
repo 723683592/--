@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*最长上升子序列
+     给定一个无序的整数数组，找到其中最长上升子序列的长度。
+    */
+   function getLen(arr){
+     if(!arr.length){
+       return 0
+     }
+    //  初始化一个标志位辅助数组
+    const flag=(new Array(arr.length)).fill(1)
+    let max=1
+    for(let i=0;i<arr.length;i++)
+         while(arr[i]<arr[i+1]){
+           i++
+           flag[i]=flag[i-1]+1
+           if(flag[i]>max){
+             max=flag[i]
+           }
+         }
+         return max
+    }
+console.log(getLen([1,2,3,4,4,3,2,1,6,7,5,8,9]))
+  </script>
+</body>
+</html>

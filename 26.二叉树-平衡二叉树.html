@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    平衡二叉树：任意结点的左右子树高度差绝对值都不大于1的二叉搜索树。
+    */
+    /*
+    平衡二叉树的判定：
+    给定一个二叉树，判断它是否是高度平衡的二叉树。
+    每个节点的的左右子树的高度差不超过1
+    */
+    function isBalanced(root) {
+      let flag = true
+
+      function dfs(root) {
+        // 设置边界条件
+        //  如果是空树，高度记为0
+        if (!flag || !root) {
+          return 0
+        }
+        //  计算左子树的高度
+        const left = dfs(root.left)
+        // 计算右子树的高度
+        const right = dfs(root.right)
+        // 如果该节点的左右子树的高度差大于1，说明非平衡二叉树
+        // 此时已经没必要继续向下深入，直接回溯即可
+        //这里的return 0，其实可以return任何一个数字，只要他不影响回溯就行
+        if (Math.abs(right - left) > 1) {
+          flag = false
+          return 0
+        }
+        // 二叉树的高度就是他的最大子树的高度加上1
+        return Math.max(left, right) + 1
+      }
+      dfs(root)
+      return flag
+    }
+    /*
+    这个题里面比较巧妙的一点就是，利用了一个标志位flag，可以在判定为假的时候
+    跳出递归
+    */
+
+    /*平衡二叉树的构造
+    给你一棵二叉搜索树，请你返回一棵平衡后的二叉搜索树，新生成的树应该与原来的树
+    有着相同的节点值。
+    */
+    function banlanceBST(root) {
+      // 中序遍历
+      // 初始化中序遍历数组
+      const nums = []
+
+      function midorder(root) {
+        if (!root) {
+          return
+        }
+        midorder(root.left)
+        nums.push(root.val)
+        midorder(root.right)
+      }
+      // 创建二叉搜索树
+      function dfs(low, high) {
+        if (low > high) {
+          return null
+        }
+        const mid = Math.floor(low + (high - low) / 2)
+        const cur = new treeNode(nums[mid])
+        cur.left = dfs(low, mid - 1)
+        cur.right = dfs(mid + 1, high)
+        return cur
+      }
+      midorder(root)
+      return dfs(0,nums.length-1)
+    }
+  </script>
+</body>
+
+</html>

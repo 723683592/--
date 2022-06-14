@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  /*
+   最小栈的设计
+    设计一个支持push pop top操作，并且能在常数时间检索到最小元素的栈
+  */
+  <script>
+    // 构造函数，存储结构的初始化
+    function MinStack(){
+      this.stack=[]
+    }
+    MinStack.prototype.push=function(el){
+      this.stack.push(el)
+    }
+    MinStack.prototype.pop=function(){
+      this.stack.pop()
+    }
+    MinStack.prototype.top=function(){
+      if(this.stack.length==0){
+        return null
+      }
+      return this.stack[this.stack.length-1]
+    }
+    // 按照一次遍历的思路取最小值,此时时间复杂度是n
+    // 但是不够酷，应该有更骚的解法
+    MinStack.prototype.getMin=function(){
+      let min=Infinity
+      for(let i=0;i<this.stack.length;i++){
+        if(stack[i]<min){
+          min=stack[i]
+        }
+      }
+      return min
+    }
+  </script>
+</body>
+</html>

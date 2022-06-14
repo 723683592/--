@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 给定一个整数数组nums和一个目标值target，请你在数组中找出和为目标值的那两个整数
+    //返回他们的下标
+    /*
+    有这么一个淳朴的想法：双层循环，外层循环固定一个数，内层循环遍历剩余的数组查找是否满足想加为target
+    时间复杂度是O(n^2)
+
+    1.其实，n^2还是太大了，空间换时间的想法要有
+    2.两数相加的问题，永远可以转化为减法查表 
+    此时空间复杂度就是就是n，时间复杂度就只有一层遍历为n
+    */
+    function sum2(nums,target) {
+       const map=new Map()
+       for(let i=0;i<nums.length;i++){
+         if(map.has(target-nums[i])){
+           console.log([i,map.get(target-nums[i])])
+           return [i,map.get(target-nums[i])]
+         }
+         map.set(nums[i],i)
+       }
+    }
+    let nums=[1,2,3,4,0,34,12]
+    sum2(nums,15)
+  </script>
+</body>
+
+</html>

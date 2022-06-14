@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*链表反转*/
+    /*
+    真题描述:定义一个函数,输入一个链表的头节点,反转该链表后输出反转链表的头节点
+    */
+    function reverseAllList(head) {
+      let pre = null
+      let cur = head
+      while (cur) {
+        // 链表断开前存值
+        next = cur.next
+        //链表断开指向前一个元素
+        cur.next = pre
+        // 更新pre
+        pre = cur
+        // 更新cur
+        cur = next
+      }
+      return pre
+    }
+    /*局部反转一个链表*/
+    /*
+      真题描述:反转从位置m到位置n的链表,请使用一趟扫描完成反转
+      */
+    function reverseList(head, m, n) {
+      const hair = new ListNode(-1)
+      hair.next = head
+      let cur = hair
+      //  找到链表的第m-1个节点
+      for (let i = 0; i < m - 1; i++) {
+        cur = cur.next
+      }
+      //left 子链的前一个端点,l1子链的第一个端点
+      let left = cur
+      let l1 = left.next
+      //  断开子链
+      left.next = null
+      for (let i = 0; i < n - m; i++) {
+        cur = cur.next
+      }
+      //right 子链的后一个端点,l2子链最后一个端点
+      let l2 = cur
+      let right = cur.next
+      //  断开子链
+      l2.next = null
+
+      function reverseAllList(l1) {
+        let pre = null
+        while (l1) {
+          let next = l1.next
+          l1.next = pre
+          pre = l1
+          l1 = next
+        }
+        return pre
+      }
+      // 接上子链
+      pre=reverseAllList(l1)
+      left.next = pre
+      let tail = pre
+      for (let i = 0; i < n - m; i++) {
+        tail = tail.next
+      }
+      tail.next = right
+      return hair.next
+    }
+  </script>
+</body>
+
+</html>

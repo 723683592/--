@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+       6
+     3  8
+    1 4   7
+    */
+    const root = {
+      val: '6',
+      left: {
+        val: '3',
+        left: {
+          val: '1',
+          left: null,
+          right: null
+        },
+        right: {
+          val: '4',
+          left: null,
+          right: null
+        }
+      },
+      right: {
+        val: '8',
+        left: {
+          val: '7',
+          left: null,
+          right: null
+        },
+        right: null
+      }
+    }
+    // 二叉搜索树的查找
+    function search(root, n) {
+      //  如果root为空，查找失败，直接返回
+      if (!root) {
+        return
+      }
+      // 因为这个二叉搜索树有一个特点就是
+      // 左孩子<=跟节点<=右孩子
+      if (root.val == n) {
+        return root
+      } else if (root.val > n) {
+        search(root.left, n)
+      } else {
+        search(root.right, n)
+      }
+    }
+    // 二叉搜索树插入新节点
+    function insertNewNode(root, n) {
+      if (!root) {
+        // 用一个值为n的节点占据这个空位
+        root = new TreeNode(n)
+        return root
+      }
+      if (root.val > n) {
+        insertNewNode(root.left, n)
+      } else {
+        insertNewNode(root.right, n)
+      }
+      return root
+    }
+    //  删除指定节点
+    function deleteNode(root, n) {
+      if (!root) {
+        return root
+      }
+      if (root.val == n) {
+        if (!root.left && !root.right) {
+          // 给一个节点赋个空值，就算给它干掉了
+          root = null
+        } else if (root.left) {
+          root.val = getMax(root.left).val
+          // 覆盖操作会消耗掉原有的maxLeft节点
+          deleteNode(root.left, root.val)
+        } else {
+          root.val = getMin(root.right).val
+          // 覆盖操作会消耗掉原有的minRight节点
+          deleteNode(root.right, root.val)
+        }
+      } else if (root.val > n) {
+        deleteNode(root.left, n)
+      } else {
+        deleteNode(root.right, n)
+      }
+
+      //  找到二叉搜索树里面的最大值
+      function getMax(root) {
+        while (root.right) {
+          root = root.right
+        }
+        return root
+      }
+      //  找到二叉搜索树里面的最小值
+      function getMin(root) {
+        while (root.left) {
+          root = root.left
+        }
+        return root
+      }
+    }
+  </script>
+</body>
+
+</html>

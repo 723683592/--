@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <SCRIPT>
+    //     链接：https://www.nowcoder.com/questionTerminal/fc897457408f4bbe9d3f87588f497729
+    // 来源：牛客网
+
+    function solve(nums) {
+      // write code here
+      nums.sort((a, b) => {
+        let x = '' + a + b
+        let y = '' + b + a
+        return y - x
+      })
+      let res = nums.join('')[0] == '0' ? '0' : nums.join('')
+      return res
+    }
+    let nums = [2, 20, 23, 4, 8]
+    console.log('结果是' + solve(nums));
+  </SCRIPT>
+</body>
+
+</html>

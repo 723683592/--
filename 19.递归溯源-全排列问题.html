@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+  全排列问题：给定一个没有重复的数字的序列，返回它所有可能的全排列
+  如【1，2，3】-》[1,2,3] [1,3,2] [2,1,3] [2,3,1] [3,2,1] [3,1,2]
+
+  思路分析：拿到一个 n 个数的数组作为入参，穷举出这 n 个数的所有排列方式。
+  穷举->DFS->递归    
+  */
+    function permute(nums) {
+      //  初始化当前排列数组
+      const curr = []
+      // 初始化结果数组
+      const res = []
+      // 创建visited结构,存放已经访问过的数字
+      const visited = {}
+      // 下面这个内嵌函数其实就是对每次排列操作的一个反映
+      //nth代表向第nth个坑位放元素
+      function dfs(nth) {
+        // 首先判断当前坑位是否存在
+        //如果坑位不存在,说明已经填满坑位
+        if (nth == nums.length) {
+          res.push(curr.slice())
+          return
+        }
+        // 判断当前剩余的元素
+        for (let i = 0; i < nums.length; i++) {
+          if (!visited[nums[i]]) {
+            // 打上访问过的记号
+            visited[nums[i]] = 1
+            // 入队
+            curr.push(nums[i])
+            //紧接着上面的结构,安置下一个坑位
+            dfs(nth + 1)
+            //回退
+            curr.pop()
+            visited[nums[i]] = 0
+          }
+        }
+      }
+      dfs(0)
+      return res
+
+    }
+
+    const _permute = string => {
+      let cur = ''
+      const res = []
+      const visited = {}
+      function dfs(nth) {
+        if (nth == string.length) {
+          res.push(cur.slice())
+          return
+        }
+        for (let i = 0; i < string.length; i++) {
+          if (!visited[string[i]]) {
+            visited[string[i]] = 1
+            cur += string[i]
+            dfs(nth + 1)
+            str = str.slice(0, str.length - 1)
+            visited[string[i]] = 0
+          }}}
+      dfs(0)
+      return res
+    }
+    // permute([1, 2, 3])
+    _permute('123')
+  </script>
+</body>
+
+</html>

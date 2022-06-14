@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script>
+      /*环形链表*/
+
+      /*判断一个链表是不是有环存在*/
+      // 通过添加标志位实现
+      function hasCircle1(head){
+         while(head){
+           if(head.flag==true){
+             return true
+           }
+           head.flag=true
+           head=head.next
+         }
+         return false
+      }
+      //快慢指针实现
+      function hasCircle2(head){
+        let fast=head
+        let slow=head
+        while(fast&&slow){
+          fast=fast.next.next
+          slow=slow.next
+          if(fast==slow){
+            return true
+          }
+        }
+        return false
+      }
+
+      /*找到环的入口节点*/
+      // 标志位实现
+      function findCircle(head){
+        while(head){
+          if(head.flag==true){
+           return head
+         }
+         head.flag=true
+         head=head.next
+        }
+       return null
+      }
+     
+
+
+
+    </script>
+</body>
+</html>

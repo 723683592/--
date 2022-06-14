@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*归并排序
+      分治思想
+      */
+
+    function mergeSort(nums) {
+      // 缓存数组长度
+      const len = nums.length
+      // 边界条件就是分成一个之后就不能再分了
+      if (len <= 1) {
+        return nums
+      }
+      const mid = Math.floor(len / 2)
+      // 因为slice的第二个参数是取不到的，所以这里有mid len
+      const leftArr = mergeSort(nums.slice(0, mid))
+      const rightArr = mergeSort(nums.slice(mid, len))
+
+      return merge2arr(leftArr, rightArr)
+
+      function merge2arr(nums1, nums2) {
+        let p1 = 0
+        let p2 = 0
+        const res = []
+        // 缓存数组的长度
+        const len1 = nums1.length
+        const len2 = nums2.length
+        while (p1 < len1 && p2 < len2) {
+          if (nums1[p1] <= nums2[p2]) {
+            res.push(nums1[p1])
+            p1++
+          } else {
+            res.push(nums2[p2])
+            p2++
+          }
+        }
+        if (p1 == len1) {
+          return res.concat(nums2.slice(p2))
+        } else {
+          return res.concat(nums1.slice(p1))
+        }
+      }
+      
+    }
+    const nums = [2, 3, 5, 6, 1, 2, 9]
+    console.log(mergeSort(nums))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   /*
+    爬楼梯问题
+   */
+  // 递归解法，因为涉及多次重复操作，时间超时
+  function findCount(n){
+      if(n==1){
+        return 1
+      }
+      if(n==2){
+        return 2
+      }
+      return findCount(n-1)+findCount(n-2)
+  }
+  //记忆搜索提效
+  // 初始化一个存放搜索结果的数组
+  const f=[]
+  function memoryFindCount(n){
+     if(n==1){
+       return 1
+     }
+     if(n==2){
+       return 2
+     }
+     if(f[n]===undefined){
+      f[n]=memoryFindCount(n-1)+memoryFindCount(n-2)
+     }
+     return f[n]
+  }
+  //动态规划解法
+  function DP(n){
+   const f=[]
+   if(n==1||n==2){
+     return n
+   }
+   for(let i=3;i<=n;i++){
+     f[i]=f[i-1]+f[i-2]
+   }
+   return f[i]
+  }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  /*栈和队列怎么玩*/
+  /*有效括号问题
+  给定一个只包含'(',')','{','}','['']'的字符串，判断字符串是否有效
+  括号有效闭合就认为是有效
+  空字符串认为是有效字符串
+  */
+  <script>
+    //有效括号问题  并不是回文字符串问题 你想想 （）跟  ）（一样吗，不一样
+    //  比较好的一种做法就是存map查表
+    function isValid1(str) {
+      // 存储对称结构
+       const map=new Map([
+         ['{','}'],
+         ['(',')'],
+         ['[',']']
+       ])
+       for(let i=0;i<str.length/2;i++){
+         if(map.get(str[i])!==str[str.length-1-i]){
+           return false
+         }
+       }
+       return true
+    }
+
+
+  </script>
+</body>
+
+</html>

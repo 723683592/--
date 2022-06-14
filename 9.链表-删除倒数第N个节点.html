@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+   <script>
+     /*删除链表的倒数第n个节点  快慢指针*/
+     function removenthNode(head){
+       const hair=new ListNode(-1)
+        hair.next=head
+        let fast=head
+        let slow=head
+        // 快指针先走n步
+        for(let i=0;i<n;i++){
+          fast=fast.next
+        }
+        // 注意观察呀,循环里面用到了什么就要在限制条件里面显示出来
+        while(fast.next){
+          fast=fast.next
+          slow=slow.next
+        }
+        // 此时slow指向倒数第n个节点的前一个节点
+        slow.next=slow.next.next
+        return hair.next
+     }
+   </script>
+</body>
+</html>

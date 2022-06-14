@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    基本排序算法：
+    冒泡排序 每轮将数组的最大值放到数组的后面
+    选择排序 每次选择当前范围内的最小值放到当前位置
+    插入排序 将当前元素前面的元素视为有序的，从后面向前比较，当满足不再小于前一个元素怒的时候停下
+    */
+    const nums = [7, 6, 4, 5, 8, 1, 9]
+    /*冒泡排序基本版本*/
+    function bubbleSort(nums) {
+      // 改进2： 面向最好时间复杂度
+      let flag = true
+      // 执行nums.length轮，向后搬移局部最大值的操作
+      for (let i = 0; i < nums.length; i++) {
+        // for(let j=0;j<nums.length-1;j++){
+        // 改进1：     避免了对数组后面已经排好的数字的重新操作
+        for (let j = 0; j < nums.length - 1 - i; j++) {
+          if (nums[j] > nums[j + 1]) {
+            const temp = nums[j]
+            nums[j] = nums[j + 1]
+            nums[j + 1] = temp
+            flag = false
+          }
+          // 如果一次交换操作也没有进行，直接在第轮之后返回原数组
+          if (flag == true) return nums
+        }
+      }
+      return nums
+    }
+    console.log('冒泡排序结果：' + bubbleSort(nums))
+
+    /*选择排序的实现*/
+    function selectSort(nums) {
+      // 第一层循环定位选择区间的开始位置
+      for (let i = 0; i < nums.length - 1; i++) {
+        // 第二层循环找到当前范围内的最小值，放到当前位置
+        for (let j = i; j < nums.length; j++) {
+          if (nums[i] > nums[j]) {
+            nums[i] = nums[j]
+          }
+        }
+      }
+      return nums
+    }
+    console.log('选择排序结果：' + selectSort(nums))
+
+    /*插入排序的实现*/
+    function insertSort(nums) {
+      // 外层循环确定当前要插入的元素
+      let flag = true
+      for (let i = 1; i < nums.length; i++) {
+        // 内层循环确定要插入的位置
+        for (let j = i - 1; j >= 0; j--) {
+          if (nums[i] < nums[j]) {
+            let temp = nums[i]
+            nums[i] = nums[j]
+            nums[j] = temp
+          }
+        }
+      }
+      return nums
+    }
+    console.log('插入排序结果：' + insertSort(nums))
+  </script>
+</body>
+
+</html>

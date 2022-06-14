@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    给定不同面额的硬币 coins 和一个总金额 amount。
+    编写一个函数来计算可以凑成总金额所需的最少的硬币个数。
+    如果没有任何一种硬币组合能组成总金额，返回 -1。
+    */
+    function getMinCount(coins, amount) {
+      let f = []
+      f[0] = 0
+      for (let i = 0; i < coins.length; i++) {
+        f[coins[i]] = 1
+      }
+      for (let i = 1; i <= amount; i++) {
+        if (!f[i]) {
+          let min = Infinity
+          for (let j = 0; j < coins.length; j++) {
+            if (i - coins[j] >= 0 && f[i - coins[j]] < min) {
+              min = f[i - coins[j]] + 1
+            }
+          }
+          f[i] = min
+        }
+      }
+      return f[amount]
+    }
+    console.log(getMinCount([1, 2, 3], 10))
+  </script>
+</body>
+
+</html>

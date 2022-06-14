@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串匹配 正则表达式</title>
+</head>
+<body>
+  <script>
+    /*
+    真题描述：设计一个支持以下两种操作的数据结构
+    void addWord(word)
+    bool search(word)
+    search(word)可以搜索文字或者正则表达式字符串，字符串只包含字母.或者a-z,.可以表示任何一个字母
+    */
+
+    /*
+    思路：
+    把要存放的数据按找数组的长度len进行分类，将len作为键，长度为len的所有字符串组成的数组作为值
+    
+    查找的话，分为两类
+       没有.的话，直接从map里面查数组，如果有这个字符串就是true
+       有.的话，初始化一个正则，利用map里面的数组的some方法用reg.test()来测定
+    */
+   function Reg(){
+    //  初始化存放数据结构的map
+      this.map=new Map()
+   }
+  //  方法定义在原型上,向新数据结构里面加数据，键值对的形式，键：字符串的长度，值：所有长度为key的字符串数组
+   Reg.prototype.addWord=function(word){
+        const len=word.length
+        if(this.map.has(len)){
+          let arr=this.map.get(len)
+          arr.push(word)
+          this.map.set(len,arr)
+        }
+        else{
+          this.map.set(len,[word])
+        }
+   }
+   Reg.prototype.search=function(str){
+       if(!this.map.has(str.length)){
+           return false
+       }
+       if(str.charAt('.')===-1){
+         return this.map.get(str.length).includes(str)
+       }
+         let reg=new RegExp(str)
+         console.log(reg)
+        //  只要有一个满足条件即可
+         return this.map.get(str.length).some(item=> {
+             return reg.test(item)
+         })
+       
+   }
+
+    let kk=new Reg()
+    kk.addWord('sout')
+    kk.addWord('lee')
+    kk.addWord('stark')
+    kk.addWord('kk')
+    console.log('lee查找：'+kk.search('.ee'))
+
+  </script>
+</body>
+</html>

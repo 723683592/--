@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  /*
+  DFS
+  本质是栈 
+  我们贯彻‘不撞南墙不回头’的原则：只要不碰壁，就绝不选择其他道路，而是坚持向道路的
+  深处挖掘。像这样将“深度”作为前进的第一要素的搜索方法，就是所谓的“深度优先搜索”
+  二叉树的递归遍历
+  */
+
+  /*
+  BFS 
+  跟队列有密切联系
+  它关心的是眼下自己能够直接到达的所有坐标，其动作有点类似扫描，比如说站在一个树的节点上，
+  它只会关心这个节点的所有子节点。广度优先搜索每次以广度为第一要务，雨露均沾，一层一层地扫描
+  最后也能将所有地坐标扫描完。
+  二叉树的层序遍历
+  */
+  <script>
+   // 声明二叉树的根节点
+    // 整个二叉树利用嵌套对象实现
+    // A
+    //B C
+    // DE  F
+    const root = {
+      val: 'A',
+      left: {
+        val: 'B',
+        left: {
+          val: 'D',
+          left: null,
+          right: null
+        },
+        right: {
+          val: 'E',
+          left: null,
+          right: null
+        }
+      },
+      right: {
+        val: 'C',
+        left: {
+          val: 'F',
+          left: null,
+          right: null
+        },
+        right: null
+      }
+    }
+    // 二叉树的层序遍历
+    function BFS(root){
+      // 初始化辅助队列
+      const queue=[]
+      queue.push(root)
+      while(queue.length!==0){
+        const top=queue[0]
+        console.log(top.val)
+        if(top.left){
+          queue.push(top.left)
+        }
+        if(top.right){
+          queue.push(top.right)
+        }
+        // 访问完毕队头元素出队
+        queue.shift()
+      }
+    }
+  </script>
+</body>
+</html>

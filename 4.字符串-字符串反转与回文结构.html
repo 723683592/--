@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    1.反转一个字符串
+    */
+    function reverse(str) {
+      return str.split('').reverse().join('')
+    }
+    //  字符串是不能用reverse方法的，必须把它转换成数组结构，然后再拼回去
+    /*
+    2.回文结构
+    正着读和反着读一毛一样
+    */
+    //  验证是不是回文结构
+    function isPalindrome1(str){
+      return str===str.split('').reverse().join('')
+    }
+    // 利用对称性
+    function isPalindrome2(str){
+        // 遍历前半部分,比较是否与对称的后半部分相等
+        for(let i=0;i<str.length/2;i++){
+          if(str[i]!=str[str.length-i-1]){
+            return false
+          }
+        }
+        return true
+    }
+    /*
+    回文字符串衍生问题
+    真题描述 给定一个非空字符串s,最多删除一个字符,判断是否能成为回文字符串
+    核心思想:对称性
+     找到不满足对称性的两个点,分别删除后验证,如果删除某一个后满足回文结构,那就是可以
+    */
+   function validPalindrome(s){
+       for(let i=0;i<str.length/2;i++){
+         if(str[i]!=str[str.length-i-1]){
+            str1=str.replace(str[i],'')
+            str2=str.replace(str[str.length-i-1],'')
+            if(isPalindrome1(str1)||isPalindrome1(str2)){
+              return true
+            }
+            else{
+              return false
+            }
+          }
+          return true
+       } 
+   }
+  </script>
+</body>
+
+</html>

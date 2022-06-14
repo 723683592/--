@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*二叉树的层序遍历的衍生
+    题目描述：给你一个二叉树，请你返回其按 层序遍历 得到的节点值。
+    [
+      [3],
+      [9,20],
+      [15,7]
+    ]
+    */
+    // 声明二叉树的根节点
+    // 整个二叉树利用嵌套对象实现
+    // A
+    //B C
+    // DE  F
+    const root = {
+      val: 'A',
+      left: {
+        val: 'B',
+        left: {
+          val: 'D',
+          left: null,
+          right: null
+        },
+        right: {
+          val: 'E',
+          left: null,
+          right: null
+        }
+      },
+      right: {
+        val: 'C',
+        left: {
+          val: 'F',
+          left: null,
+          right: null
+        },
+        right: null
+      }
+    }
+
+    function levelOrder(root) {
+      if (!root) {
+        return
+      }
+      // 初始化结果数组
+      const res = []
+      // 初始化辅助队列
+      const queue = []
+      // 将根节点推进去
+      queue.push(root)
+      // 只要队列不为空，就一直执行里面的逻辑
+      // 队列里面存放的是，还没把值给res的原始节点
+      while (queue.length) {
+          // 初始化该层数组
+          const level=[]
+          level.push(root)
+          // 因为下面用到了length并,循环里面的逻辑会改变长度,所以
+          // 有必要缓存数组长度
+          const len=queue.length  
+          // 将该层里面的所有节点出队
+          for(let i=0;i<len;i++){
+            const top=queue[0]
+            level.push(top.val)
+            if(top.left){
+              queue.push(top.left)
+            }
+            if(top.right){
+              queue.push(top.right)
+            }
+            queue.shift()
+          } 
+          res.push(level)
+      }
+      return res
+    }
+    console.log(levelOrder(root))
+      /*翻转二叉树的实现*/
+      function reverseTree(root){
+          if(!root){
+            return 
+          }
+          const temp=root.left
+          root.left=root.right
+          root.right=temp
+          reverseTree(root.left)
+          reverseTree(root.right)
+          return root
+    }
+    console.log(levelOrder(reverseTree(root)))
+  </script>
+</body>
+
+</html>

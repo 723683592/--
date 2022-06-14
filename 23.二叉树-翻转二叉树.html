@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*翻转二叉树的实现*/
+    function reverseTree(root){
+          if(!root){
+            return 
+          }
+          const temp=root.left
+          root.left=root.right
+          root.right=temp
+          reverseTree(root.left)
+          reverseTree(root.right)
+          return root
+    }
+
+  </script>
+</body>
+</html>
